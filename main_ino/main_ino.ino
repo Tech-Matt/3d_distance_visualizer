@@ -44,12 +44,6 @@ void loop() {
 
 //  equation for temperature in degrees C from datasheet
 //  Serial.print("Temperature: "); Serial.print(Tmp / 340.00 + 36.53); Serial.println(" C ");
-
-  Serial.print("Gyroscope: ");
-  Serial.print("X = "); Serial.print(GyX);
-  Serial.print(" | Y = "); Serial.print(GyY);
-  Serial.print(" | Z = "); Serial.println(GyZ);
-  Serial.println(" ");
   
   digitalWrite(TRIGGER_PORT, LOW);
   //10 micro-seconds beam on trigger
@@ -59,15 +53,21 @@ void loop() {
 
   long duration = pulseIn(ECHO_PORT, HIGH);
   long distance = 0.034 * duration / 2;
-  Serial.print("Distance: ");
+
+  //SERIAL PRINTING FORMAT-> X Y Z DISTANCE
+  Serial.print(GyX);
+  Serial.print(" ");
+  Serial.print(GyY);
+  Serial.print(" ");
+  Serial.print(GyZ);
+  Serial.print(" ");
 
   //case out of range
   if ( duration > 38000 ) {
     Serial.println("Out of range   ");
   }
   else {
-    Serial.print(distance);
-    Serial.println(" cm     ");
+    Serial.println(distance);
   }
 
   delay(1000);
